@@ -17,11 +17,10 @@ with open("payments.jsonl", encoding="utf-8") as payments:
             continue
 
         txn_id = event.get("txn_id")
-        timestamp = event.get("timestamp")
+        timestamp = event.get("ts")
         if not txn_id or not timestamp:
             continue
 
-        # ISO-8601 timestamps sort chronologically after parsing, including Z suffixes.
         event_time = datetime.fromisoformat(str(timestamp).replace("Z", "+00:00"))
         previous = latest_by_txn.get(txn_id)
 
