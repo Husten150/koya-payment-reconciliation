@@ -32,7 +32,8 @@ total = Decimal("0")
 
 for _, event in latest_by_txn.values():
     if event.get("status") == "success":
-        total += Decimal(str(event["amount"]))
+        amount = str(event["amount"]).replace(",", "")
+        total += Decimal(amount)
         count += 1
 
 with open("expected.txt", encoding="utf-8") as expected_file:
